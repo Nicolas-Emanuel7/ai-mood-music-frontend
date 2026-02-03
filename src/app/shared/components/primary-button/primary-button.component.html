@@ -1,0 +1,18 @@
+@if (routerLink(); as link) {
+<a
+  [routerLink]="link"
+  class="primary-button"
+  [class.primary-button--disabled]="disabled()"
+>
+  {{ label() }}
+</a>
+} @else {
+<button
+  type="{{ type() }}"
+  class="primary-button"
+  [disabled]="disabled()"
+  [class.primary-button--disabled]="disabled()"
+>
+  {{ label() }}
+</button>
+}
