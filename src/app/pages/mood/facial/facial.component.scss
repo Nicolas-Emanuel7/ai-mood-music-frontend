@@ -1,0 +1,29 @@
+@use "../../../shared/styles/colors" as *;
+@use "../../../shared/styles/typography" as *;
+
+.mood-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background-color: $onboarding-bg;
+}
+
+.mood-page__title {
+  @extend %onboarding-title;
+  color: $text-primary;
+  margin-bottom: 16px;
+}
+
+.mood-page__back {
+  font-family: $font-family;
+  font-size: 16px;
+  color: $accent-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
