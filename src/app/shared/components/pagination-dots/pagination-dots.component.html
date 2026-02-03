@@ -1,0 +1,9 @@
+<div class="pagination-dots" role="tablist" aria-label="Passos do onboarding">
+  @for (i of items(); track i) {
+  <span
+    class="pagination-dots__dot"
+    [class.pagination-dots__dot--active]="i === current()"
+    [attr.aria-current]="i === current() ? 'step' : null"
+  ></span>
+  }
+</div>
