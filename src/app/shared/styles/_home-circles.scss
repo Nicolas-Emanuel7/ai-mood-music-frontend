@@ -1,0 +1,58 @@
+// Home: círculo branco (conteúdo) + 3 círculos coloridos atrás (cores das steps 1, 2, 3)
+
+@use "colors" as *;
+
+@keyframes home-circle-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(6px);
+  }
+}
+
+@mixin home-circle($size, $bg, $z, $anim-delay: 0s) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $size;
+  height: $size;
+  background: $bg;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: $z;
+  transform: translate(-50%, -50%);
+  animation: home-circle-float 5s ease-in-out infinite;
+  animation-delay: $anim-delay;
+}
+
+.home-circles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.home-circles__layer {
+  // Atrás de tudo: cor da step 3 (maior)
+  &--3 {
+    @include home-circle(130vmin, $accent-primary, 0, 0s);
+  }
+
+  // Cor da step 2 (médio)
+  &--2 {
+    @include home-circle(110vmin, $accent-light, 1, 0.5s);
+  }
+
+  // Cor da step 1 (na frente dos coloridos)
+  &--1 {
+    @include home-circle(92vmin, $arc-pale-yellow, 2, 1s);
+  }
+
+  // Círculo branco: onde ficam texto e botões
+  &--white {
+    @include home-circle(78vmin, $onboarding-bg, 3, 1.5s);
+  }
+}

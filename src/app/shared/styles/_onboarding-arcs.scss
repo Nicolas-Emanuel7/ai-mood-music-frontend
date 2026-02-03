@@ -1,0 +1,97 @@
+// Decorative onboarding arcs: 3 circular layers
+// Step 1: one circle (front). Step 2: same + new bigger circle BEHIND. Step 3: same + another bigger circle BEHIND.
+// New circle always appears from behind (bigger, lower z-index).
+
+@use "colors" as *;
+
+@mixin arc-circle($size, $top, $bg, $z: 0) {
+  position: absolute;
+  top: $top;
+  left: 50%;
+  transform: translateX(-50%);
+  width: $size;
+  height: $size;
+  background: $bg;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: $z;
+}
+
+// Animation: new arc appears from behind (slide up + fade in)
+@keyframes onboarding-arc-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.onboarding-arcs {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+// vmax = same value for width and height → perfect circle (no oval)
+.onboarding-arcs__layer {
+  // Layer 1: step 1 circle — FRONT (smallest, highest), stays visible in all steps
+  &--1 {
+    @include arc-circle(160vmax, 42%, $arc-pale-yellow, 2);
+  }
+
+  // Layer 2: appears in step 2 — BEHIND layer 1 (bigger, lower)
+  &--2 {
+    @include arc-circle(190vmax, 48%, $accent-light, 1);
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+
+  // Layer 3: appears in step 3 — BEHIND layer 2 (biggest, lowest). Same color as "Próximo" button.
+  &--3 {
+    @include arc-circle(220vmax, 54%, $accent-primary, 0);
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+}
+
+// Step 1: only layer 1 visible
+.onboarding-arcs--step1 .onboarding-arcs__layer--2,
+.onboarding-arcs--step1 .onboarding-arcs__layer--3 {
+  visibility: hidden;
+  opacity: 0;
+}
+
+// Step 2: layers 1 (front) + 2 (behind); layer 2 animates in from behind
+.onboarding-arcs--step2 .onboarding-arcs__layer--2 {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  animation: onboarding-arc-in 0.45s ease-out forwards;
+}
+
+.onboarding-arcs--step2 .onboarding-arcs__layer--3 {
+  visibility: hidden;
+  opacity: 0;
+}
+
+// Step 3: all visible; layer 3 (behind) animates in
+.onboarding-arcs--step3 .onboarding-arcs__layer--2 {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.onboarding-arcs--step3 .onboarding-arcs__layer--3 {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  animation: onboarding-arc-in 0.45s ease-out forwards;
+}

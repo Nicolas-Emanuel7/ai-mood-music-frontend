@@ -1,0 +1,33 @@
+// AI Mood Music - Typography
+
+@use "colors" as *;
+
+$font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  sans-serif;
+
+$title-size: 28px;
+$title-weight: 600;
+$subtitle-size: 16px;
+$subtitle-weight: 400;
+
+%onboarding-title {
+  font-family: $font-family;
+  font-size: $title-size;
+  font-weight: $title-weight;
+  line-height: 1.25;
+  color: $text-primary;
+  margin: 0;
+
+  @media (min-width: 375px) {
+    font-size: 32px;
+  }
+}
+
+%onboarding-subtitle {
+  font-family: $font-family;
+  font-size: $subtitle-size;
+  font-weight: $subtitle-weight;
+  line-height: 1.5;
+  color: $text-secondary;
+  margin: 0;
+}

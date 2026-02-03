@@ -1,0 +1,60 @@
+// Decorative top and bottom arcs for home screen (CSS only)
+
+@use "colors" as *;
+
+@mixin arc-layer($width, $height, $bg, $position: bottom) {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: $width;
+  height: $height;
+  background: $bg;
+  pointer-events: none;
+
+  @if $position == bottom {
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+  } @else {
+    top: 0;
+    border-radius: 0 0 50% 50%;
+  }
+}
+
+.home-arcs--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  pointer-events: none;
+  overflow: hidden;
+
+  &::before {
+    @include arc-layer(180%, 90px, rgba($accent-primary, 0.28), top);
+    top: -20px;
+  }
+  &::after {
+    @include arc-layer(140%, 70px, $arc-pale-yellow, top);
+    top: 0;
+  }
+}
+
+.home-arcs--bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  pointer-events: none;
+  overflow: hidden;
+
+  &::before {
+    @include arc-layer(180%, 90px, rgba($accent-primary, 0.35), bottom);
+    bottom: -20px;
+  }
+  &::after {
+    @include arc-layer(140%, 70px, $accent-light, bottom);
+    bottom: 0;
+  }
+}
