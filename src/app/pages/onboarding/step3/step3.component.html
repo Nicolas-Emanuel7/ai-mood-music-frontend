@@ -1,0 +1,19 @@
+<div class="onboarding-step">
+  <div class="onboarding-step__content">
+    <h1 class="onboarding-step__title">Falar sobre o momento ajuda.</h1>
+    <p class="onboarding-step__subtitle">Texto ou áudio. Do seu jeito.</p>
+  </div>
+
+  <div class="onboarding-arcs onboarding-arcs--step3" aria-hidden="true">
+    <div class="onboarding-arcs__layer onboarding-arcs__layer--1"></div>
+    <div class="onboarding-arcs__layer onboarding-arcs__layer--2"></div>
+    <div class="onboarding-arcs__layer onboarding-arcs__layer--3"></div>
+  </div>
+
+  <div class="onboarding-step__footer">
+    <app-pagination-dots [total]="3" [current]="2" />
+
+    <app-primary-button label="Próximo" routerLink="/home" />
+    <a routerLink="/onboarding/step2" class="onboarding-step__back">Voltar</a>
+  </div>
+</div>

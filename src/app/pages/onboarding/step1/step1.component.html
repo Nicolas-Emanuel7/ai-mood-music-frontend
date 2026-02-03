@@ -1,0 +1,17 @@
+<div class="onboarding-step">
+  <div class="onboarding-step__content">
+    <h1 class="onboarding-step__title">Olá!</h1>
+    <p class="onboarding-step__subtitle">Como você está se sentindo agora?</p>
+  </div>
+
+  <div class="onboarding-arcs onboarding-arcs--step1" aria-hidden="true">
+    <div class="onboarding-arcs__layer onboarding-arcs__layer--1"></div>
+    <div class="onboarding-arcs__layer onboarding-arcs__layer--2"></div>
+    <div class="onboarding-arcs__layer onboarding-arcs__layer--3"></div>
+  </div>
+
+  <div class="onboarding-step__footer">
+    <app-pagination-dots [total]="3" [current]="0" />
+    <app-primary-button label="Próximo" routerLink="/onboarding/step2" />
+  </div>
+</div>
