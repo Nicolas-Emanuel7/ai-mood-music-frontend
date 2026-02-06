@@ -63,6 +63,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/about/about.component').then((m) => m.AboutComponent),
   },
+  {
+    path: 'result',
+    loadComponent: () =>
+      import('./pages/result/result.component').then((m) => m.ResultComponent),
+  },
   { path: '', redirectTo: 'onboarding/step1', pathMatch: 'full' },
   { path: '**', redirectTo: 'onboarding/step1' },
 ];
