@@ -1,4 +1,7 @@
 <div class="onboarding-step">
+  <div class="onboarding-step__logo">
+    <img src="/assets/logos/logo.svg" alt="Moodwave" />
+  </div>
   <div class="onboarding-step__content">
     <h1 class="onboarding-step__title">A música influencia o seu humor.</h1>
     <p class="onboarding-step__subtitle">
@@ -14,7 +17,6 @@
 
   <div class="onboarding-step__footer">
     <app-pagination-dots [total]="3" [current]="1" />
-    
     <app-primary-button label="Próximo" routerLink="/onboarding/step3" />
     <a routerLink="/onboarding/step1" class="onboarding-step__back">Voltar</a>
   </div>

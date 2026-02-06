@@ -1,6 +1,5 @@
-// Decorative onboarding arcs: 3 circular layers
-// Step 1: one circle (front). Step 2: same + new bigger circle BEHIND. Step 3: same + another bigger circle BEHIND.
-// New circle always appears from behind (bigger, lower z-index).
+// Círculos de fundo: 1º tertiary ~30% altura, 2º light ~35%, 3º primary ~40% (de baixo pra cima).
+// Novo círculo surge de trás do anterior (maior, atrás).
 
 @use "colors" as *;
 
@@ -17,7 +16,6 @@
   z-index: $z;
 }
 
-// Animation: new arc appears from behind (slide up + fade in)
 @keyframes onboarding-arc-in {
   from {
     opacity: 0;
@@ -26,6 +24,16 @@
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes onboarding-arc-float {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
   }
 }
 
@@ -40,41 +48,40 @@
   overflow: hidden;
 }
 
-// vmax = same value for width and height → perfect circle (no oval)
 .onboarding-arcs__layer {
-  // Layer 1: step 1 circle — FRONT (smallest, highest), stays visible in all steps
+  // Camada 1: tertiary — ~30% altura (topo do arco em 70%) + flutuação
   &--1 {
-    @include arc-circle(160vmax, 42%, $arc-pale-yellow, 2);
+    @include arc-circle(140vmax, 70%, $accent-tertiary, 2);
+    animation: onboarding-arc-float 5s ease-in-out 0s infinite;
   }
 
-  // Layer 2: appears in step 2 — BEHIND layer 1 (bigger, lower)
+  // Camada 2: light — ~35% altura (topo em 65%)
   &--2 {
-    @include arc-circle(190vmax, 48%, $accent-light, 1);
+    @include arc-circle(160vmax, 65%, $accent-light, 1);
     opacity: 0;
     transform: translateX(-50%) translateY(20px);
   }
 
-  // Layer 3: appears in step 3 — BEHIND layer 2 (biggest, lowest). Same color as "Próximo" button.
+  // Camada 3: primary — ~40% altura (topo em 60%)
   &--3 {
-    @include arc-circle(220vmax, 54%, $accent-primary, 0);
+    @include arc-circle(180vmax, 60%, $accent-primary, 0);
     opacity: 0;
     transform: translateX(-50%) translateY(20px);
   }
 }
 
-// Step 1: only layer 1 visible
 .onboarding-arcs--step1 .onboarding-arcs__layer--2,
 .onboarding-arcs--step1 .onboarding-arcs__layer--3 {
   visibility: hidden;
   opacity: 0;
 }
 
-// Step 2: layers 1 (front) + 2 (behind); layer 2 animates in from behind
 .onboarding-arcs--step2 .onboarding-arcs__layer--2 {
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  animation: onboarding-arc-in 0.45s ease-out forwards;
+  animation: onboarding-arc-in 0.45s ease-out forwards,
+    onboarding-arc-float 5s ease-in-out 0.5s infinite;
 }
 
 .onboarding-arcs--step2 .onboarding-arcs__layer--3 {
@@ -82,16 +89,17 @@
   opacity: 0;
 }
 
-// Step 3: all visible; layer 3 (behind) animates in
 .onboarding-arcs--step3 .onboarding-arcs__layer--2 {
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+  animation: onboarding-arc-float 5s ease-in-out 0.5s infinite;
 }
 
 .onboarding-arcs--step3 .onboarding-arcs__layer--3 {
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  animation: onboarding-arc-in 0.45s ease-out forwards;
+  animation: onboarding-arc-in 0.45s ease-out forwards,
+    onboarding-arc-float 5s ease-in-out 1s infinite;
 }

@@ -12,10 +12,13 @@
   height: 8px;
   border-radius: 50%;
   background-color: rgba($text-primary, 0.2);
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease, width 0.2s ease,
+    border-radius 0.2s ease;
 
   &--active {
+    width: 24px;
+    border-radius: 999px;
     background-color: $accent-primary;
-    transform: scale(1.25);
+    transform: none;
   }
 }
