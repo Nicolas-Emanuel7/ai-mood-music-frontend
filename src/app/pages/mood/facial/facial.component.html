@@ -1,4 +1,20 @@
-<div class="mood-page">
-  <h1 class="mood-page__title">Expressar por expressão</h1>
-  <a routerLink="/home" class="mood-page__back">Voltar ao início</a>
+<div class="facial-page">
+  <main class="facial-page__main">
+    <h1 class="facial-page__title">Vejamos...</h1>
+
+    <div class="facial-page__oval">
+      <video
+        #videoEl
+        class="facial-page__video"
+        autoplay
+        playsinline
+        muted
+      ></video>
+      @if (error()) {
+        <p class="facial-page__error">{{ error() }}</p>
+      }
+    </div>
+
+    <a routerLink="/home" class="facial-page__back">Voltar</a>
+  </main>
 </div>

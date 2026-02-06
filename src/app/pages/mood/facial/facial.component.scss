@@ -1,29 +1,75 @@
 @use "../../../shared/styles/colors" as *;
 @use "../../../shared/styles/typography" as *;
 
-.mood-page {
+.facial-page {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 24px;
-  background-color: $onboarding-bg;
+  background-color: $arc-pale-yellow;
+  position: relative;
 }
 
-.mood-page__title {
+.facial-page__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+  flex: 1;
+}
+
+.facial-page__title {
   @extend %onboarding-title;
   color: $text-primary;
-  margin-bottom: 16px;
+  text-align: center;
+  margin: 0 0 24px;
 }
 
-.mood-page__back {
+.facial-page__oval {
+  width: 85%;
+  max-width: 300px;
+  aspect-ratio: 3 / 4;
+  border-radius: 50%;
+  border: 4px solid $accent-primary;
+  background-color: $onboarding-bg;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.facial-page__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.facial-page__error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  margin: 0;
   font-family: $font-family;
-  font-size: 16px;
-  color: $accent-primary;
+  font-size: 14px;
+  color: $text-secondary;
+  text-align: center;
+}
+
+.facial-page__back {
+  margin-top: 24px;
+  font-family: $font-family;
+  font-size: 14px;
+  font-weight: 500;
+  color: $text-secondary;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   &:hover {
-    text-decoration: underline;
+    color: $accent-primary;
   }
 }
