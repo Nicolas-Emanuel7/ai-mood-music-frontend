@@ -1,4 +1,47 @@
-<div class="mood-page">
-  <h1 class="mood-page__title">Expressar por voz</h1>
-  <a routerLink="/home" class="mood-page__back">Voltar ao início</a>
+<div class="microphone-page">
+  @if (isSending()) {
+    <div class="microphone-page__loading" aria-live="polite">
+      <div class="microphone-page__spinner"></div>
+      <p class="microphone-page__loading-text">Analisando...</p>
+    </div>
+  }
+  <div class="home-circles" aria-hidden="true">
+    <div class="home-circles__layer home-circles__layer--3"></div>
+    <div class="home-circles__layer home-circles__layer--2"></div>
+    <div class="home-circles__layer home-circles__layer--1"></div>
+    <div class="home-circles__layer home-circles__layer--white"></div>
+  </div>
+
+  <main class="microphone-page__main">
+    <h1 class="microphone-page__title">Conta como você está se sentindo?</h1>
+    <p class="microphone-page__subtitle">
+      Uma história, uma frase ou até uma palavra serve
+    </p>
+
+    <button
+      type="button"
+      class="microphone-page__btn"
+      [class.microphone-page__btn--recording]="isRecording()"
+      [style.transform]="'scale(' + (1 + volumeScale()) + ')'"
+      [disabled]="isSending()"
+      (click)="toggleRecording()"
+      [attr.aria-label]="isRecording() ? 'Parar gravação' : 'Iniciar gravação'"
+    >
+      <svg
+        class="microphone-page__icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        <line x1="12" y1="19" x2="12" y2="23" />
+        <line x1="8" y1="23" x2="16" y2="23" />
+      </svg>
+    </button>
+
+    <a routerLink="/home" class="microphone-page__back">Voltar</a>
+  </main>
 </div>
