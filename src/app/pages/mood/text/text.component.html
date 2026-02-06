@@ -1,4 +1,26 @@
-<div class="mood-page">
-  <h1 class="mood-page__title">Expressar por texto</h1>
-  <a routerLink="/home" class="mood-page__back">Voltar ao início</a>
+<div class="text-page">
+  <div class="home-circles" aria-hidden="true">
+    <div class="home-circles__layer home-circles__layer--3"></div>
+    <div class="home-circles__layer home-circles__layer--2"></div>
+    <div class="home-circles__layer home-circles__layer--1"></div>
+    <div class="home-circles__layer home-circles__layer--white"></div>
+  </div>
+
+  <main class="text-page__main">
+    <div class="text-page__logo">
+      <img src="/assets/logos/logo.svg" alt="Logo" />
+    </div>
+
+    <div class="text-page__circle">
+      <textarea
+        #textInput
+        class="text-page__input"
+        placeholder="Como você está se sentindo?"
+        rows="5"
+        [(ngModel)]="text"
+      ></textarea>
+    </div>
+
+    <a routerLink="/home" class="text-page__back">Voltar</a>
+  </main>
 </div>
