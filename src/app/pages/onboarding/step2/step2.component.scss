@@ -81,7 +81,10 @@
 }
 
 .onboarding-arcs--step2 .onboarding-arcs__layer--2 {
-  visibility: visible !important;
-  opacity: 1 !important;
-  transform: translateX(-50%) translateY(0) !important;
+  opacity: 0;
+  transform: translateX(-50%) translateY(40px);
+  animation: arcFadeUp 0.8s ease-out forwards;
+  animation-delay: 0.2s;
 }
+
+
