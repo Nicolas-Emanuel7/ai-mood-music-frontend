@@ -132,7 +132,13 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 4px solid $accent-primary;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    rgba($accent-primary, 0.9),
+    rgba($accent-primary, 0.6)
+  );
+  color: #fff;
   background-color: $onboarding-bg;
   font-size: 40px;
   line-height: 1;
@@ -146,7 +152,11 @@
 }
 
 .result-page__description-wrap {
-  margin-bottom: 24px;
+  background-color: $onboarding-bg;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 16px 0 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -156,13 +166,23 @@
 
 .result-page__description {
   font-family: $font-family;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: $text-primary;
   color: $text-secondary;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.result-page__eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-secondary;
+  text-align: center;
+  margin: 0 0 6px;
 }
 
 .result-page__ver-mais {
@@ -202,8 +222,15 @@
   border-radius: 8px;
   transition: background-color 0.2s ease;
 
+  padding: 8px;
+  border-radius: 12px;
+
   &:hover {
-    background-color: rgba($accent-primary, 0.06);
+    background-color: rgba($accent-primary, 0.08);
+  }
+
+  &:active {
+    background-color: rgba($accent-primary, 0.12);
   }
 }
 
@@ -345,7 +372,9 @@
   font-weight: 600;
   text-decoration: none;
   color: #fff;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 
   &:hover {
     opacity: 0.9;
