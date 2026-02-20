@@ -43,63 +43,65 @@
   right: 0;
   bottom: 0;
   top: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
 }
 
 .onboarding-arcs__layer {
-  // Camada 1: tertiary — ~30% altura (topo do arco em 70%) + flutuação
   &--1 {
     @include arc-circle(140vmax, 70%, $accent-tertiary, 2);
-    animation: onboarding-arc-float 5s ease-in-out 0s infinite;
+    animation: floatArc 6s ease-in-out infinite alternate;
+    animation-delay: 0s;
   }
 
-  // Camada 2: light — ~35% altura (topo em 65%)
   &--2 {
     @include arc-circle(160vmax, 65%, $accent-light, 1);
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    animation: floatArc 6s ease-in-out infinite alternate;
+    animation-delay: 1s;
   }
 
-  // Camada 3: primary — ~40% altura (topo em 60%)
   &--3 {
     @include arc-circle(180vmax, 60%, $accent-primary, 0);
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    animation: floatArc 6s ease-in-out infinite alternate;
+    animation-delay: 2s;
   }
 }
 
-.onboarding-arcs--step1 .onboarding-arcs__layer--2,
-.onboarding-arcs--step1 .onboarding-arcs__layer--3 {
-  visibility: hidden;
+.onboarding-arcs__layer--2,
+.onboarding-arcs__layer--3 {
   opacity: 0;
-}
-
-.onboarding-arcs--step2 .onboarding-arcs__layer--2 {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  animation: onboarding-arc-in 0.45s ease-out forwards,
-    onboarding-arc-float 5s ease-in-out 0.5s infinite;
-}
-
-.onboarding-arcs--step2 .onboarding-arcs__layer--3 {
   visibility: hidden;
-  opacity: 0;
 }
 
-.onboarding-arcs--step3 .onboarding-arcs__layer--2 {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  animation: onboarding-arc-float 5s ease-in-out 0.5s infinite;
+.onboarding-arcs--step1 {
+  opacity: 0.9;
 }
 
-.onboarding-arcs--step3 .onboarding-arcs__layer--3 {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  animation: onboarding-arc-in 0.45s ease-out forwards,
-    onboarding-arc-float 5s ease-in-out 1s infinite;
+.onboarding-arcs--step2 {
+  opacity: 0.85;
+
+  .onboarding-arcs__layer--2 {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.onboarding-arcs--step3 {
+  opacity: 0.8;
+
+  .onboarding-arcs__layer--2,
+  .onboarding-arcs__layer--3 {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes floatArc {
+  from {
+    transform: translateX(-50%) translateY(0px);
+  }
+  to {
+    transform: translateX(-50%) translateY(-12px);
+  }
 }

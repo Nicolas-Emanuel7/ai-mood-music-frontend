@@ -2,17 +2,32 @@
 
 @use "colors" as *;
 
-@keyframes home-circle-float {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) translateY(0);
+@keyframes home-circle-grow {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
   }
-  50% {
-    transform: translate(-50%, -50%) translateY(6px);
+  70% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
   }
 }
 
-@mixin home-circle($size, $bg, $z, $anim-delay: 0s) {
+@keyframes home-circle-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(6px) scale(1);
+  }
+}
+
+@mixin home-circle($size, $bg, $z, $grow-delay: 0s, $float-delay: 0s) {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -22,9 +37,11 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: $z;
-  transform: translate(-50%, -50%);
-  animation: home-circle-float 5s ease-in-out infinite;
-  animation-delay: $anim-delay;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  animation: home-circle-grow 0.8s cubic-bezier(.2,.8,.2,1) forwards,
+    home-circle-float 6s ease-in-out infinite;
+  animation-delay: $grow-delay, $float-delay;
 }
 
 .home-circles {
@@ -38,21 +55,21 @@
 .home-circles__layer {
   // Atrás de tudo: cor da step 3 (maior)
   &--3 {
-    @include home-circle(130vmin, $accent-primary, 0, 0s);
+    @include home-circle(130vmin, $accent-primary, 0, 0.2s, 1.2s);
   }
 
   // Cor da step 2 (médio)
   &--2 {
-    @include home-circle(110vmin, $accent-light, 1, 0.5s);
+    @include home-circle(110vmin, $accent-light, 1, 0.4s, 1.4s);
   }
 
   // Cor da step 1 (na frente dos coloridos)
   &--1 {
-    @include home-circle(92vmin, $arc-pale-yellow, 2, 1s);
+    @include home-circle(92vmin, $arc-pale-yellow, 2, 0.6s, 1.6s);
   }
 
   // Círculo branco: onde ficam texto e botões
   &--white {
-    @include home-circle(78vmin, $onboarding-bg, 3, 1.5s);
+    @include home-circle(78vmin, $onboarding-bg, 3, 0.8s, 1.8s);
   }
 }
