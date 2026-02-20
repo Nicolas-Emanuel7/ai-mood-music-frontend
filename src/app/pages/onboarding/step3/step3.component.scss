@@ -11,6 +11,26 @@
   overflow: hidden;
 }
 
+.onboarding-step__emoji {
+  font-size: 32px;
+  margin-bottom: 12px;
+  animation: bounceIn 600ms ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .onboarding-step__logo {
   position: relative;
   z-index: 1;
@@ -19,8 +39,8 @@
   justify-content: center;
 
   img {
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
     object-fit: contain;
     display: block;
   }
@@ -85,4 +105,3 @@
   transform: translateX(-50%) translateY(40px);
   animation: arcFadeUp 0.8s ease-out forwards;
 }
-

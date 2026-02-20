@@ -1,10 +1,15 @@
-<div class="onboarding-step">
-  <div class="onboarding-step__logo">
+<div class="onboarding-step" @pageEnter>
+  <div class="onboarding-step__logo animate-item">
     <img src="/assets/logos/logo.svg" alt="Moodwave" />
   </div>
   <div class="onboarding-step__content">
-    <h1 class="onboarding-step__title">A música influencia o seu humor.</h1>
-    <p class="onboarding-step__subtitle">
+    <div class="onboarding-step__emoji animate-item">
+      🎧
+    </div>
+    <h1 class="onboarding-step__title animate-item">
+      A música influencia o seu humor.
+    </h1>
+    <p class="onboarding-step__subtitle animate-item">
       Sons certos ajudam você a focar, relaxar ou ganhar energia.
     </p>
   </div>
@@ -15,7 +20,7 @@
     <div class="onboarding-arcs__layer onboarding-arcs__layer--3"></div>
   </div>
 
-  <div class="onboarding-step__footer">
+  <div class="onboarding-step__footer animate-item">
     <app-pagination-dots [total]="3" [current]="1" />
     <app-primary-button label="Próximo" routerLink="/onboarding/step3" />
     <a routerLink="/onboarding/step1" class="onboarding-step__back">Voltar</a>
