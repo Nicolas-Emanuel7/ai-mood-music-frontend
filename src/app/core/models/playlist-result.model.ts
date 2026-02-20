@@ -11,5 +11,6 @@ export interface PlaylistResult {
   icon: string;
   name: string;
   description: string;
+  energyLevel?: 'low' | 'medium' | 'high';
   tracks: Track[];
 }

@@ -1,6 +1,18 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import type { PlaylistResult, Track } from '../../core/models/playlist-result.model';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  query,
+  stagger,
+} from '@angular/animations';
+import type {
+  PlaylistResult,
+  Track,
+} from '../../core/models/playlist-result.model';
 
 const MOCK_PLAYLIST: PlaylistResult = {
   icon: '😄',
@@ -56,11 +68,32 @@ const DESCRIPTION_TRUNCATE_LENGTH = 80;
 @Component({
   selector: 'app-result',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgClass],
   templateUrl: './result.component.html',
   styleUrl: './result.component.scss',
+  animations: [
+    trigger('pageEnter', [
+      transition(':enter', [
+        query(
+          '.animate-item',
+          [
+            style({ opacity: 0, transform: 'translateY(20px)' }),
+            stagger(120, [
+              animate(
+                '450ms cubic-bezier(.2,.8,.2,1)',
+                style({ opacity: 1, transform: 'translateY(0)' })
+              ),
+            ]),
+          ],
+          { optional: true }
+        ),
+      ]),
+    ]),
+  ],
 })
 export class ResultComponent implements OnInit {
+  private router = inject(Router);
+
   loaded = signal(false);
   playlist = signal<PlaylistResult | null>(null);
 
@@ -72,9 +105,25 @@ export class ResultComponent implements OnInit {
     return (p?.description?.length ?? 0) > DESCRIPTION_TRUNCATE_LENGTH;
   });
 
+  energyLevel = computed(() => this.playlist()?.energyLevel);
+
   ngOnInit(): void {
+    const navigation = this.router.getCurrentNavigation();
+    const playlistFromState = navigation?.extras?.state?.['playlist'] as
+      | PlaylistResult
+      | undefined;
+
+    if (playlistFromState) {
+      this.playlist.set(playlistFromState);
+      this.loaded.set(true);
+      return;
+    }
+
     setTimeout(() => {
-      this.playlist.set(MOCK_PLAYLIST);
+      this.playlist.set({
+        ...MOCK_PLAYLIST,
+        energyLevel: MOCK_PLAYLIST.energyLevel ?? 'medium',
+      });
       this.loaded.set(true);
     }, 1200);
   }
