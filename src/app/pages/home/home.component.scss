@@ -1,6 +1,5 @@
 @use "../../shared/styles/colors" as *;
 @use "../../shared/styles/typography" as *;
-@use "../../shared/styles/home-circles";
 
 .home {
   min-height: 100dvh;
@@ -9,14 +8,18 @@
   justify-content: center;
   align-items: center;
   padding: 24px;
-  background-color: $arc-pale-yellow;
   position: relative;
   overflow: hidden;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba($accent-primary, 0.05),
+    transparent 60%
+  );
 }
 
 .home__main {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,17 +60,19 @@
   color: $accent-primary;
   text-decoration: none;
   box-shadow: 0 2px 12px rgba($accent-primary, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease,
+  transition:
+    transform 0.25s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.25s ease,
     background-color 0.2s ease;
 
   &:hover {
     background-color: rgba($accent-primary, 0.08);
     box-shadow: 0 4px 16px rgba($accent-primary, 0.3);
-    transform: scale(1.03);
+    transform: translateY(-3px) scale(1.04);
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
   }
 }
 
@@ -80,6 +85,7 @@
   width: 88px;
   height: 88px;
   box-shadow: 0 4px 16px rgba($accent-primary, 0.25);
+  animation: pulseCenter 4s ease-in-out infinite;
 }
 
 .home__icon {
@@ -90,6 +96,16 @@
 .home__btn--center .home__icon {
   width: 36px;
   height: 36px;
+}
+
+@keyframes pulseCenter {
+  0%,
+  100% {
+    box-shadow: 0 4px 16px rgba($accent-primary, 0.25);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba($accent-primary, 0.35);
+  }
 }
 
 .home__about {

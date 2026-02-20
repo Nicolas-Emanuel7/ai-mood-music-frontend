@@ -1,4 +1,29 @@
+@use "./shared/styles/colors" as *;
+@use "./shared/styles/home-circles";
+
 :host {
   display: block;
   min-height: 100%;
+  position: relative;
+}
+
+.shared-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: $arc-pale-yellow;
+}
+
+.shared-background .home-circles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
 }
