@@ -1,6 +1,9 @@
 <div class="facial-page">
-  <main class="facial-page__main">
-    <h1 class="facial-page__title">Vejamos...</h1>
+  <main class="facial-page__main" @pageEnter>
+    <h1 class="facial-page__title">
+      {{ error() ? 'Erro na câmera' : 'Posicione seu rosto no centro' }}
+    </h1>
+    <p class="facial-page__subtitle">Olhe para a câmera por alguns segundos</p>
 
     <div class="facial-page__oval">
       <video
@@ -10,10 +13,15 @@
         playsinline
         muted
       ></video>
+      <div class="facial-page__scan-line"></div>
       @if (error()) {
         <p class="facial-page__error">{{ error() }}</p>
       }
     </div>
+
+    <button class="facial-page__capture" type="button">
+      Capturar emoção
+    </button>
 
     <a routerLink="/home" class="facial-page__back">Voltar</a>
   </main>

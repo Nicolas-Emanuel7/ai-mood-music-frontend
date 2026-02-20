@@ -1,25 +1,27 @@
-<div class="text-page">
-  <div class="home-circles" aria-hidden="true">
-    <div class="home-circles__layer home-circles__layer--3"></div>
-    <div class="home-circles__layer home-circles__layer--2"></div>
-    <div class="home-circles__layer home-circles__layer--1"></div>
-    <div class="home-circles__layer home-circles__layer--white"></div>
-  </div>
-
-  <main class="text-page__main">
+<div class="text-page" [class.text-page--writing]="text.length > 10">
+  <main class="text-page__main" @pageEnter>
     <div class="text-page__logo">
       <img src="/assets/logos/logo.svg" alt="Logo" />
     </div>
 
-    <div class="text-page__circle">
+    <div
+      class="text-page__circle"
+      [class.text-page__circle--active]="text.length > 0"
+    >
       <textarea
         #textInput
         class="text-page__input"
-        placeholder="Como você está se sentindo?"
+        [placeholder]="currentPlaceholder"
         rows="5"
         [(ngModel)]="text"
       ></textarea>
     </div>
+
+    @if (text.length > 3) {
+    <button type="button" class="text-page__continue">
+      Descobrir minha playlist
+    </button>
+    }
 
     <a routerLink="/home" class="text-page__back">Voltar</a>
   </main>

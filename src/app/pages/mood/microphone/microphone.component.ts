@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, signal, OnDestroy, inject, NgZone } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
@@ -7,6 +8,17 @@ import { Router, RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './microphone.component.html',
   styleUrl: './microphone.component.scss',
+  animations: [
+    trigger('pageEnter', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(30px)' }),
+        animate(
+          '500ms cubic-bezier(.2,.8,.2,1)',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class MoodMicrophoneComponent implements OnDestroy {
   private ngZone = inject(NgZone);
@@ -91,8 +103,13 @@ export class MoodMicrophoneComponent implements OnDestroy {
       const blob = new Blob(this.chunks, { type: 'audio/webm' });
       this.isSending.set(true);
       setTimeout(() => {
-        this.router.navigate(['/result']);
-      }, 2500);
+        this.router.navigate(['/loading'], {
+          state: {
+            source: 'microphone',
+            audioBlob: blob,
+          },
+        });
+      }, 1000);
     }
   }
 

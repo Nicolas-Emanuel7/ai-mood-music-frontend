@@ -7,8 +7,13 @@
   flex-direction: column;
   align-items: center;
   padding: 24px;
-  background-color: $arc-pale-yellow;
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba($accent-primary, 0.2),
+    transparent 70%
+  );
   position: relative;
+  overflow: hidden;
 }
 
 .facial-page__main {
@@ -24,7 +29,13 @@
   @extend %onboarding-title;
   color: $text-primary;
   text-align: center;
-  margin: 0 0 24px;
+  margin: 0 0 12px;
+}
+
+.facial-page__subtitle {
+  @extend %onboarding-subtitle;
+  text-align: center;
+  margin: 0 0 28px;
 }
 
 .facial-page__oval {
@@ -37,6 +48,17 @@
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+  box-shadow: 0 20px 60px rgba($accent-primary, 0.3);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 2px solid rgba($accent-primary, 0.3);
+    animation: haloPulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
 }
 
 .facial-page__video {
@@ -44,6 +66,23 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.facial-page__scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba($accent-primary, 0.6),
+    transparent
+  );
+  animation: scanMove 3s linear infinite;
+  z-index: 2;
 }
 
 .facial-page__error {
@@ -58,6 +97,24 @@
   font-size: 14px;
   color: $text-secondary;
   text-align: center;
+  z-index: 3;
+}
+
+.facial-page__capture {
+  margin-top: 28px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  background: $accent-primary;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 10px 30px rgba($accent-primary, 0.3);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .facial-page__back {
@@ -71,5 +128,29 @@
 
   &:hover {
     color: $accent-primary;
+  }
+}
+
+@keyframes haloPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes scanMove {
+  0% {
+    top: 10%;
+  }
+  50% {
+    top: 70%;
+  }
+  100% {
+    top: 10%;
   }
 }

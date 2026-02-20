@@ -1,6 +1,5 @@
 @use "../../../shared/styles/colors" as *;
 @use "../../../shared/styles/typography" as *;
-@use "../../../shared/styles/home-circles";
 
 .microphone-page {
   min-height: 100dvh;
@@ -9,7 +8,11 @@
   justify-content: center;
   align-items: center;
   padding: 24px;
-  background-color: $arc-pale-yellow;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba($accent-primary, 0.15),
+    transparent 70%
+  );
   position: relative;
   overflow: hidden;
 }
@@ -18,7 +21,8 @@
   position: fixed;
   inset: 0;
   z-index: 10;
-  background-color: rgba($arc-pale-yellow, 0.95);
+  background-color: rgba($arc-pale-yellow, 0.85);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,8 +31,8 @@
 }
 
 .microphone-page__spinner {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   border: 4px solid rgba($accent-primary, 0.2);
   border-top-color: $accent-primary;
   border-radius: 50%;
@@ -72,7 +76,24 @@
 .microphone-page__subtitle {
   @extend %onboarding-subtitle;
   text-align: center;
-  margin: 0 0 40px;
+  margin: 0 0 36px;
+}
+
+.microphone-page__mic-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.microphone-page__mic-halo {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba($accent-primary, 0.15);
+  animation: micHaloPulse 3s ease-in-out infinite;
+  z-index: 0;
 }
 
 .microphone-page__btn {
@@ -89,6 +110,8 @@
   box-shadow: 0 4px 20px rgba($accent-primary, 0.35);
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
     transform 0.15s ease-out;
+  position: relative;
+  z-index: 1;
 
   &:hover {
     box-shadow: 0 6px 24px rgba($accent-primary, 0.45);
@@ -108,6 +131,7 @@
     color: $accent-primary;
     border: 3px solid $accent-primary;
     box-shadow: 0 4px 20px rgba($accent-primary, 0.25);
+    animation: micBreath 1.6s ease-in-out infinite;
 
     &:hover {
       box-shadow: 0 6px 24px rgba($accent-primary, 0.35);
@@ -121,6 +145,28 @@
   pointer-events: none;
 }
 
+.microphone-page__equalizer {
+  display: flex;
+  gap: 4px;
+  margin-top: 16px;
+
+  span {
+    width: 4px;
+    height: 16px;
+    background: $accent-primary;
+    border-radius: 999px;
+    animation: eq 1s infinite ease-in-out;
+  }
+
+  span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
 .microphone-page__back {
   margin-top: 40px;
   font-family: $font-family;
@@ -132,5 +178,37 @@
 
   &:hover {
     color: $accent-primary;
+  }
+}
+
+@keyframes micHaloPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+}
+
+@keyframes micBreath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1.4);
   }
 }
