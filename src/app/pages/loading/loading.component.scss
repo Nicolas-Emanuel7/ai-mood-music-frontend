@@ -1,0 +1,55 @@
+@use "../../shared/styles/colors" as *;
+@use "../../shared/styles/typography" as *;
+
+.loading-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 24px;
+  background: radial-gradient(
+    circle at center,
+    rgba($accent-primary, 0.08),
+    transparent 70%
+  );
+  background-color: $bg-primary;
+  color: #fff;
+}
+
+.loading-page__wave {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba($accent-primary, 0.15);
+  animation: pulse 2s infinite ease-in-out;
+  filter: blur(2px);
+}
+
+.loading-page__content {
+  position: relative;
+  max-width: 320px;
+  text-align: center;
+}
+
+.loading-page__content h1 {
+  @extend %onboarding-title;
+  color: #fff;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+}
+
