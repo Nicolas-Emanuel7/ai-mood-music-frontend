@@ -3,9 +3,7 @@
     <img src="/assets/logos/logo.svg" alt="Moodwave" />
   </div>
   <div class="onboarding-step__content">
-    <div class="onboarding-step__emoji animate-item">
-      ✨
-    </div>
+    <div class="onboarding-step__emoji animate-item">✨</div>
     <h1 class="onboarding-step__title animate-item">
       Falar sobre o momento ajuda.
     </h1>
@@ -22,7 +20,17 @@
 
   <div class="onboarding-step__footer animate-item">
     <app-pagination-dots [total]="3" [current]="2" />
-    <app-primary-button label="Próximo" routerLink="/home" />
+    <app-primary-button
+      label="Próximo"
+      [disabled]="isTransitioning"
+      (click)="startExit()"
+    />
     <a routerLink="/onboarding/step2" class="onboarding-step__back">Voltar</a>
   </div>
+
+  <div
+    class="onboarding-step__exit-arc"
+    [class.onboarding-step__exit-arc--active]="isTransitioning"
+    aria-hidden="true"
+  ></div>
 </div>

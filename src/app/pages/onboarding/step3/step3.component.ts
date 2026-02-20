@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { PrimaryButtonComponent } from '../../../shared/components/primary-button/primary-button.component';
 import { PaginationDotsComponent } from '../../../shared/components/pagination-dots/pagination-dots.component';
 import {
@@ -43,4 +43,17 @@ import {
     ]),
   ],
 })
-export class Step3Component {}
+export class Step3Component {
+  private readonly router = inject(Router);
+  isTransitioning = false;
+
+  startExit() {
+    if (this.isTransitioning) {
+      return;
+    }
+    this.isTransitioning = true;
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 900);
+  }
+}
